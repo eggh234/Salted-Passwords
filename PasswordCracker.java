@@ -121,7 +121,7 @@ public class PasswordCracker {
                         Temp = Pass[i-1] + Salt[a];
                         getMd5(Temp);
                         Integer number = Integer.valueOf(UID);
-                        System.out.println(i);//debugging print statement so we know the code is running
+                        System.out.println("Cracking Combination Number: " + i);//debugging print statement so we know the code is running
                         if(getMd5(Temp) == Hash[number-1]){
                             System.out.println("Password is: " + Pass[i-1]);
                         }
