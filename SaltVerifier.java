@@ -1,4 +1,3 @@
-//Daniel Huang + Hridhoy Ahmond
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -51,6 +50,11 @@ public class SaltVerifier {
         System.out.println("What is the UID?");//gets UID
         Scanner ask = new Scanner(System.in);
         UID = Integer.parseInt(ask.nextLine());
+        while(UID > 100){
+            System.out.println("Input UID between 1-100");//gets UID
+            Scanner ask1 = new Scanner(System.in);
+            UID = Integer.parseInt(ask1.nextLine());
+        }
         read(UID, "/Users/daniel_huang/Desktop/intelij/src/Sup/Password.txt", "Password: ");//reads password file
         password = line;
         read(UID, "/Users/daniel_huang/Desktop/intelij/src/Sup/Salt.txt", "Salt value: ");//reads salt file
@@ -59,10 +63,9 @@ public class SaltVerifier {
         String s = Concat1;//creates the concated string for hash function
         hashtext = getMd5(s);//gets hash value
         System.out.println("Hash function value: " + hashtext);
-        Integer number = Integer.valueOf(UID);
-        Check2("/Users/daniel_huang/Desktop/intelij/src/Sup/Hash.txt", UID, hashtext);
-        //Check("/Users/daniel_huang/Desktop/intelij/src/Sup/Hash.txt", hashtext);
+        Check("/Users/daniel_huang/Desktop/intelij/src/Sup/Hash.txt", UID, hashtext);
     }
+
     public static void Con(String password, String salt){
         Concat1 = password + salt;//creates concated salt for hash function
     }
@@ -85,12 +88,13 @@ public class SaltVerifier {
             e.printStackTrace();//error catching
         }
     }
-    public static void Check2(String s, int number, String hashtext){
+    public static void Check(String s, int number, String hashtext){
         try{
 
             String line = Files.readAllLines(Paths.get(s)).get(number-1);
             if(hashtext.equals(line)){//checks if the hastext matches at a certain line
                 System.out.println("Hash value matches at line " + UID);
+
             } else {
                 System.out.println("No found matched hash values");
             }
