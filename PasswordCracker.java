@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class PasswordCracker {
     public static int UID;
-    public static String Concat1;
     public static String Temp;//creating global variables
     public static String[] Pass = new String[100];
     public static String[] Salt = new String[100];
     public static String[] Hash = new String[100];
     public static String line;
+    
     // Java program to calculate MD5 hash value
     public static String getMd5(String input) {
         try {
@@ -75,30 +75,6 @@ public class PasswordCracker {
             e.printStackTrace();
         }
     }
-    public static void Con(String password, String salt){
-        Concat1 = password + salt;//creates concatenated salt for hash function
-    }
-
-    public static void read(int UID, String s) {
-        try {
-            //read txt file to get the password and salt for concatenation
-            FileReader file0 = new FileReader(s);
-            BufferedReader buffer = new BufferedReader(file0);
-
-            // iterate through the file
-            for (int i = 1; i < 100; i++) {
-                if (i == UID)
-                    line = buffer.readLine();
-                else
-                    buffer.readLine();
-            }
-            //System.out.println(Label + line);
-        } catch (IOException e) {
-            e.printStackTrace();//error catching
-        }
-    }
-    //take UID salt + UID password and check hash function and return if it matches UID hash
-    //get md5 creates salt
     public static void Check(String s, String[] Pass, String[] Salt){
 
         String line = "";
