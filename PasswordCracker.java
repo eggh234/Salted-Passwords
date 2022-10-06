@@ -6,20 +6,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-// Java program to calculate MD5 hash value
 public class PasswordCracker {
     public static int UID;
-    public static String hashtext;
     public static String Concat1;
-    public static String password;
-    public static String salt;
     public static String Temp;//creating global variables
     public static String[] Pass = new String[100];
     public static String[] Salt = new String[100];
     public static String[] Hash = new String[100];
     public static String line;
-    public static String getMd5(String input)
-    {
+    // Java program to calculate MD5 hash value
+    public static String getMd5(String input) {
         try {
 
             // Static getInstance method is called with hashing MD5
@@ -57,19 +53,10 @@ public class PasswordCracker {
             Scanner ask1 = new Scanner(System.in);
             UID = Integer.parseInt(ask1.nextLine());
         }
-        Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Password.txt", Pass);
+        Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Password.txt", Pass);//path names
         Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Salt.txt", Salt);
         Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Hash.txt", Hash);//filling in array for comparing values
         Check("/Users/daniel_huang/Desktop/intelij/src/Sup/UID.txt", Pass, Salt);
-        read(UID, "/Users/daniel_huang/Desktop/intelij/src/Sup/UID.txt");//reads UID file
-        read(UID, "/Users/daniel_huang/Desktop/intelij/src/Sup/Password.txt");//reads password file
-        password = line;
-        read(UID, "/Users/daniel_huang/Desktop/intelij/src/Sup/Salt.txt");//reads salt file
-        salt = line;
-        Con(password, salt);
-        String s = Concat1;//creates the concatenated string for hash function
-        hashtext = getMd5(s);//gets hash value
-        System.out.println("Hash value: " + hashtext);
     }
 
     public static void Fill(String s, String[] array) {
@@ -136,6 +123,7 @@ public class PasswordCracker {
                             System.out.println("UID Number: " + UID);
                             System.out.println("Salt Number: " + Salt[i-1]);
                             System.out.println("Password Number: " + Pass[i-1]);
+                            System.out.println("Hash Value: " + getMd5(Temp));
                             return;//breaks the loop
                     }//loops through every single combination of password and salt
                 }//then compares the hash value to the hash value of the hash function of the text file
