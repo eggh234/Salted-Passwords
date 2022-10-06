@@ -7,13 +7,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class PasswordCracker {
-    public static int UID;
+    public static String UID;
+    public static int flag = 0;
     public static String Temp;//creating global variables
     public static String[] Pass = new String[100];
     public static String[] Salt = new String[100];
     public static String[] Hash = new String[100];
     public static String line;
-    
+
     // Java program to calculate MD5 hash value
     public static String getMd5(String input) {
         try {
@@ -45,18 +46,33 @@ public class PasswordCracker {
     // Driver code
 
     public static void main(String[] args) {
-        System.out.println("What is the UID?");//gets UID
-        Scanner ask = new Scanner(System.in);
-        UID = Integer.parseInt(ask.nextLine());
-        while(UID > 100){//makes sure the user input is valid
-            System.out.println("Input number 1-100");
+        while(flag == 0){
+            System.out.println("Input UID between 1-100: "); //gets user input
             Scanner ask1 = new Scanner(System.in);
-            UID = Integer.parseInt(ask1.nextLine());
+            UID = ask1.nextLine();
+            Usercheck(UID);
         }
         Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Password.txt", Pass);//path names
         Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Salt.txt", Salt);
         Fill("/Users/daniel_huang/Desktop/intelij/src/Sup/Hash.txt", Hash);//filling in array for comparing values
         Check("/Users/daniel_huang/Desktop/intelij/src/Sup/UID.txt", Pass, Salt);
+    }
+
+    public static int Usercheck(String UID) {
+        int val = 0;
+        try {
+            val = Integer.parseInt(UID);
+            if(Integer.parseInt(UID) > 100) {
+                System.out.println("Invalid Input");
+            }
+            else{
+                flag = 1;
+            }
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid Input");
+        }
+        return val;
     }
 
     public static void Fill(String s, String[] array) {
@@ -89,7 +105,7 @@ public class PasswordCracker {
                     for(int a = 0; a < 100; a++){
                         Temp = Pass[i-1] + Salt[a];
                         getMd5(Temp);
-                        Integer number = UID;
+                        Integer number = Integer.valueOf(UID);
                         Counter = Counter + 1;
                         System.out.println("Cracking Combination Number: " + Counter);
                         System.out.println("Line Number: " + i);//debugging print statement so we know the code is running
