@@ -20,7 +20,7 @@ public class SaltVerifier {
     {
         try {
 
-            // Static getInstance method is called with hashing MD5
+            // Static getInstance method is     awcalled with hashing MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
 
             // digest() method is called to calculate message digest
@@ -47,7 +47,7 @@ public class SaltVerifier {
     // Driver code
 
     public static void main(String[] args) {
-        System.out.println("What is the UID?");//gets UID
+        System.out.println("Input UID between 1-100");//gets UID
         Scanner ask = new Scanner(System.in);
         UID = Integer.parseInt(ask.nextLine());
         while(UID > 100){
@@ -77,7 +77,7 @@ public class SaltVerifier {
             BufferedReader buffer = new BufferedReader(file0);
 
             // iterate through the file
-            for (int i = 1; i < 100; i++) {
+            for (int i = 1; i < 101; i++) {
                 if (i == UID)
                     line = buffer.readLine();//reads the file at the specific line
                 else
@@ -104,3 +104,4 @@ public class SaltVerifier {
         }
     }
 }
+
